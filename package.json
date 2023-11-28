@@ -1,0 +1,12 @@
+{
+    "name": "tecto-stress",
+    "version": "0.1.0",
+    "description": "webapp from stress and app-stress-2",
+    "author": "alfredicus & xaliphostes",
+    "keywords": [],
+    "scripts": {
+        "serve": "http-server . -p 92 -o index.html"
+    },
+    "dependencies": {   
+    }
+}

@@ -1,0 +1,164 @@
+<html>
+
+<head>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="/libs/@alfredicus/app-stress-2.js" type="module"></script>
+</head>
+
+<body>
+    <div class="navbar">
+        <span style="font-size:30px;cursor:pointer; color: white; margin-left: 5px;" onclick="openNav()"
+            id="mainMenu">&#9776;</span>
+        <h3 style="color: white;padding-right: 20px;">Tecto Stress</h3>
+        <!-- <button type="button" class="btn btn-primary" data-toggle="modal" id="myBtn"
+            style="margin-left: 5px; margin-right: 5px;">
+            Help
+        </button> -->
+    </div>
+
+    <!-- See https://www.w3schools.com/howto/howto_js_sidenav.asp -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="col-sm-6" id="gui" style="margin: 5px; opacity: 100%; min-width: 95%;"></div>
+    </div>
+
+    <div id="main" style="margin-top: 50px;">
+        <div class="container" style="width: 100%;">
+            <div class="row align-items-start">
+                <div id="console"
+                    style="left:0%; border: 2px solid #000000; padding-bottom: 10px; border-radius: 5px;margin-top: 0px; background-color: rgb(232, 232, 232);">
+                    <p id="info"></p>
+                </div>
+                <div>
+                    <center>
+                        <div id="isoDiv" style="margin-top: 5px;">
+                        </div>
+                        <div id="domainDiv" style="margin-top: 5px;">
+                        </div>
+                        <div id="domainsDiv" style="margin-top: 5px;">
+                        </div>
+                        <div id="domain3DDiv" style="margin-top: 5px;">
+                        </div>
+                        <div id="histogramDiv" style="margin-top: 5px;">
+                        </div>
+                        <div id="scatterDiv" style="margin-top: 5px;">
+                        </div>
+                    </center>
+                </div>
+            </div>
+        </div>
+        <footer class="panel panel-default" id="logs" style="visibility: hidden">
+            <p>Logs...</p>
+        </footer>
+    </div>
+
+    <a href="http://youwol.com" target="_blank">
+        <img src="/media/youwol.png" width="150px" alt="http://www.youwol.com/"
+            style="position: fixed; right: 10px;bottom: 100px; opacity: 100%;" />
+    </a>
+
+    <a href="http://www.gm.univ-montp2.fr" target="_blank">
+        <img src="/media/geosciences.png" width="150px" alt="http://www.gm.univ-montp2.fr/"
+            style="position: fixed; right: 10px;bottom: 30px; opacity: 100%;" />
+    </a>
+
+
+    <input id="upload" multiple type="file" style="visibility: hidden" />
+
+    <script>
+        let oldConsole = undefined
+
+        function openNav() {
+            const w = 300
+            document.getElementById("mySidenav").style.width = `${w}px`
+            document.getElementById("main").style.marginLeft = `${w}px`
+            document.getElementById("mainMenu").style.opacity = 0
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0px"
+            document.getElementById("main").style.marginLeft = "0px"
+            document.getElementById("mainMenu").style.opacity = 1
+        }
+
+        function setupHelp() {
+            // Get the modal
+            var modal = document.getElementById("myModal");
+
+            // Get the button that opens the modal
+            var btn = document.getElementById("myBtn");
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks on the button, open the modal
+            btn.onclick = function () {
+                modal.style.display = "block";
+            }
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+
+        function redirectConsole() {
+            if (!console) {
+                console = {}
+            }
+            oldConsole = console.log
+            const logger = document.getElementById('logs')
+            console.log = (message) => {
+                if (typeof message == 'object') {
+                    logger.innerHTML = (JSON && JSON.stringify ? JSON.stringify(message) : String(message)) + '<br />'
+                } else {
+                    logger.innerHTML = message + '<br />'
+                }
+            }
+        }
+
+        function setupKeys() {
+            // ESC key for the navbar
+            $(document).keyup(e => {
+                if (e.keyCode === 27) {
+                    const w = document.getElementById("mySidenav").style.width
+                    if (w === '0px') {
+                        openNav()
+                    }
+                    else {
+                        closeNav()
+                    }
+                }
+            })
+        }
+    </script>
+
+    <script type="module">
+        const gui = window['@alfredicus/app-stress-2']
+
+        // setupHelp()
+        setupKeys()
+        openNav()
+        gui.createGUI('gui')
+    </script>
+</body>
+
+</html>
