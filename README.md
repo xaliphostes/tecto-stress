@@ -18,3 +18,7 @@ Tecto-Stress is a web application that enables tectonic stress inversion by util
 This webapp relies on the library [@alfredicus/stress](https://github.com/alfredicus/stress), also developed by 
 - [Alfredicus](https://github.com/alfredicus) from [Geoscience-Montpellier](http://www.gm.univ-montp2.fr/)
 - [Xaliphostes](https://github.com/xaliphostes) from [YouWol](youwol.com).
+
+<p align="center">
+    <img src="media/ConjugateCompactionalFaults.jpg" width="500">
+</p>
