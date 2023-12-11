@@ -19,6 +19,4 @@ This webapp relies on the library [@alfredicus/stress](https://github.com/alfred
 - [Alfredicus](https://github.com/alfredicus) from [Geoscience-Montpellier](http://www.gm.univ-montp2.fr/)
 - [Xaliphostes](https://github.com/xaliphostes) from [YouWol](youwol.com).
 
-<p align="center">
-    <img src="media/ConjugateCompactionalFaults.jpg" width="500">
-</p>
+Read the [documentation online](./doc/main.md)
